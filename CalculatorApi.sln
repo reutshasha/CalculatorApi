@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35013.160
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CalculatorApi", "src\IO.Swagger\CalculatorApi.csproj", "{411853B8-BF2F-45F0-B1B7-7A17F22418F3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BL", "BL\BL.csproj", "{F77EECAC-517C-45C7-A9F7-BE2C44A46E3D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAL", "DAL\DAL.csproj", "{053F0517-4757-49CC-BA67-A6E4269DC4DA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{411853B8-BF2F-45F0-B1B7-7A17F22418F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{411853B8-BF2F-45F0-B1B7-7A17F22418F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{411853B8-BF2F-45F0-B1B7-7A17F22418F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{411853B8-BF2F-45F0-B1B7-7A17F22418F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F77EECAC-517C-45C7-A9F7-BE2C44A46E3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F77EECAC-517C-45C7-A9F7-BE2C44A46E3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F77EECAC-517C-45C7-A9F7-BE2C44A46E3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F77EECAC-517C-45C7-A9F7-BE2C44A46E3D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{053F0517-4757-49CC-BA67-A6E4269DC4DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{053F0517-4757-49CC-BA67-A6E4269DC4DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{053F0517-4757-49CC-BA67-A6E4269DC4DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{053F0517-4757-49CC-BA67-A6E4269DC4DA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BCC379EF-C517-4148-81A4-2C528E9E13CB}
+	EndGlobalSection
+EndGlobal

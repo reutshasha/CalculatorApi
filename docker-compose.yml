@@ -1,0 +1,9 @@
+services:
+  calculatorapi:
+    build:
+      context: .
+      dockerfile: CalculatorApi/Dockerfile
+    ports:
+      - "7051:80" 
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development

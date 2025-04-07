@@ -1,0 +1,240 @@
+{
+  "openapi" : "3.0.0",
+  "info" : {
+    "title" : "Calculator API",
+    "description" : "API for performing arithmetic operations and JWT-based authentication.",
+    "version" : "v1"
+  },
+  "servers" : [ {
+    "url" : "https://virtserver.swaggerhub.com/ReutS-f73/CalculatorAPI/v1",
+    "description" : "SwaggerHub API Auto Mocking"
+  }, {
+    "url" : "http://localhost:8080/api"
+  } ],
+  "paths" : {
+    "/auth/login" : {
+      "post" : {
+        "summary" : "Login and obtain a JWT token",
+        "description" : "Accepts a username and password and returns a JWT token for authentication.",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/LoginRequest"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Successful login",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/LoginResponse"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Invalid login credentials",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/calculator/calculate" : {
+      "post" : {
+        "summary" : "Perform an arithmetic operation",
+        "description" : "Accepts two numbers in the request body and an operation type in the header (X-Operation-Type) to perform the corresponding calculation. Requires JWT authentication.",
+        "parameters" : [ {
+          "name" : "X-Operation-Type",
+          "in" : "header",
+          "description" : "The type of operation to perform (add, subtract, multiply, divide)",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string",
+            "enum" : [ "add", "subtract", "multiply", "divide" ]
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/CalculationRequest"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Operation performed successfully",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/CalculationResponse"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad request (e.g., invalid request body, unsupported operation)",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized (Missing or invalid Bearer token)",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Internal server error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "bearerAuth" : [ ]
+        } ]
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "CalculationRequest" : {
+        "required" : [ "num1", "num2" ],
+        "type" : "object",
+        "properties" : {
+          "num1" : {
+            "type" : "number",
+            "description" : "The first number",
+            "example" : 10
+          },
+          "num2" : {
+            "type" : "number",
+            "description" : "The second number",
+            "example" : 5
+          }
+        }
+      },
+      "CalculationResponse" : {
+        "type" : "object",
+        "properties" : {
+          "num1" : {
+            "type" : "number",
+            "description" : "The first number received",
+            "example" : 10
+          },
+          "num2" : {
+            "type" : "number",
+            "description" : "The second number received",
+            "example" : 5
+          },
+          "operation" : {
+            "type" : "string",
+            "description" : "The operation performed",
+            "example" : "add"
+          },
+          "result" : {
+            "type" : "number",
+            "description" : "The result of the operation",
+            "example" : 15
+          }
+        },
+        "example" : {
+          "result" : 15,
+          "num1" : 10,
+          "operation" : "add",
+          "num2" : 5
+        }
+      },
+      "LoginRequest" : {
+        "required" : [ "password", "username" ],
+        "type" : "object",
+        "properties" : {
+          "username" : {
+            "type" : "string",
+            "description" : "The username",
+            "example" : "user"
+          },
+          "password" : {
+            "type" : "string",
+            "description" : "The password",
+            "example" : "password123"
+          }
+        }
+      },
+      "LoginResponse" : {
+        "type" : "object",
+        "properties" : {
+          "token" : {
+            "type" : "string",
+            "description" : "The issued JWT token",
+            "example" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+          }
+        },
+        "example" : {
+          "token" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+        }
+      },
+      "ErrorResponse" : {
+        "type" : "object",
+        "properties" : {
+          "statusCode" : {
+            "type" : "integer",
+            "description" : "HTTP status code",
+            "example" : 400
+          },
+          "error" : {
+            "type" : "string",
+            "description" : "The error type",
+            "example" : "BadRequest"
+          },
+          "message" : {
+            "type" : "string",
+            "description" : "The error message",
+            "example" : "Invalid request body."
+          },
+          "detailedMessage" : {
+            "type" : "string",
+            "description" : "Detailed error message (for development)",
+            "nullable" : true,
+            "example" : "The 'Num1' field is required."
+          }
+        }
+      }
+    },
+    "securitySchemes" : {
+      "bearerAuth" : {
+        "type" : "http",
+        "scheme" : "bearer",
+        "bearerFormat" : "JWT"
+      }
+    }
+  }
+}
